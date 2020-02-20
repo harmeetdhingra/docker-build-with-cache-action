@@ -36,7 +36,7 @@ check_required_input() {
 }
 
 login_to_registry() {
-  decoded_password=$(echo "${INPUT_PASSWORD}" | base64 --decode)
+  decoded_password=$(echo "${INPUT_PASSWORD}" | base64 -d)
   echo "${decoded_password}" | docker login -u "${INPUT_USERNAME}" --password-stdin "${INPUT_REGISTRY}"
 }
 
