@@ -36,7 +36,8 @@ check_required_input() {
 }
 
 login_to_registry() {
-  echo "${INPUT_PASSWORD}" | base64 -d | docker login -u "${INPUT_USERNAME}" --password-stdin "${INPUT_REGISTRY}"
+  decoded_password=$(echo "${INPUT_PASSWORD}" | base64 --decode)
+  echo "${decoded_password}" | docker login -u "${INPUT_USERNAME}" --password-stdin "${INPUT_REGISTRY}"
 }
 
 pull_cached_stages() {
